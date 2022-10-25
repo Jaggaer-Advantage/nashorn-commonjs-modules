@@ -1,10 +1,10 @@
 package com.coveo.nashorn_modules;
 
-import javax.script.ScriptException;
+import org.openjdk.nashorn.api.scripting.NashornException;
 
-import jdk.nashorn.api.scripting.NashornException;
+import javax.script.ScriptException;
 
 @FunctionalInterface
 public interface RequireFunction {
-  public Object require(String module) throws ScriptException, NashornException;
+  Object require(String module) throws ScriptException, NashornException;
 }

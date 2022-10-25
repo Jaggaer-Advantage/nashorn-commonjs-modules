@@ -1,10 +1,9 @@
 package com.coveo.nashorn_modules;
 
 import org.junit.Test;
+import org.openjdk.nashorn.api.scripting.NashornScriptEngine;
 
 import javax.script.ScriptEngineManager;
-
-import jdk.nashorn.api.scripting.NashornScriptEngine;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

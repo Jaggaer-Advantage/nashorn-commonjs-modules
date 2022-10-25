@@ -4,7 +4,7 @@ import javax.script.Bindings;
 import javax.script.ScriptContext;
 import javax.script.ScriptException;
 
-import jdk.nashorn.api.scripting.NashornScriptEngine;
+import org.openjdk.nashorn.api.scripting.NashornScriptEngine;
 
 public class Require {
   // This overload registers the require function globally in the engine scope
