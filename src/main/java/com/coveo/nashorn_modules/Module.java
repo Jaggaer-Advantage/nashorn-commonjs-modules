@@ -1,5 +1,9 @@
 package com.coveo.nashorn_modules;
 
+import org.openjdk.nashorn.api.scripting.NashornScriptEngine;
+import org.openjdk.nashorn.api.scripting.ScriptObjectMirror;
+import org.openjdk.nashorn.internal.runtime.ECMAException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,10 +15,6 @@ import javax.script.ScriptContext;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import javax.script.SimpleBindings;
-
-import jdk.nashorn.api.scripting.NashornScriptEngine;
-import jdk.nashorn.api.scripting.ScriptObjectMirror;
-import jdk.nashorn.internal.runtime.ECMAException;
 
 public class Module extends SimpleBindings implements RequireFunction {
   private NashornScriptEngine engine;
@@ -356,12 +356,12 @@ public class Module extends SimpleBindings implements RequireFunction {
     return created;
   }
 
-  private ScriptObjectMirror parseJson(String json) throws ScriptException {
+  private ScriptObjectMirror parseJson(String json) {
     // Pretty lame way to parse JSON but hey...
     return (ScriptObjectMirror) jsonConstructor.callMember("parse", json);
   }
 
-  private void throwModuleNotFoundException(String module) throws ScriptException {
+  private void throwModuleNotFoundException(String module) {
     Bindings error = (Bindings) errorConstructor.newObject("Module not found: " + module);
     error.put("code", "MODULE_NOT_FOUND");
     throw new ECMAException(error, null);
@@ -392,7 +392,7 @@ public class Module extends SimpleBindings implements RequireFunction {
     return current;
   }
 
-  private Bindings createSafeBindings() throws ScriptException {
+  private Bindings createSafeBindings() {
     // As explained in https://github.com/coveo/nashorn-commonjs-modules/pull/16/files a plain
     // SimpleBindings has quite a few limitations in Nashorn compared to a ScriptObject, so
     // whenever we need an instance of those (for `exports` etc.) we create a real JS object.

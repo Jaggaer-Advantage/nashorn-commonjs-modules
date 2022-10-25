@@ -6,7 +6,7 @@ import java.io.File;
 
 import javax.script.ScriptEngineManager;
 
-import jdk.nashorn.api.scripting.NashornScriptEngine;
+import org.openjdk.nashorn.api.scripting.NashornScriptEngine;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -20,7 +20,8 @@ public class FilesystemFolderTest {
   private File subfile = new File(file, "subdir");
   private File subsubfile = new File(subfile, "subsubdir");
 
-  private String rootPath = file.getAbsolutePath().substring(0, file.getAbsolutePath().indexOf(File.separator));
+  private String rootPath =
+      file.getAbsolutePath().substring(0, file.getAbsolutePath().indexOf(File.separator));
 
   @Test
   public void rootFolderHasTheExpectedProperties() {

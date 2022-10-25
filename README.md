@@ -2,7 +2,7 @@
 [![license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/coveo/nashorn-commonjs-modules/blob/master/LICENSE)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.coveo/nashorn-commonjs-modules/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.coveo/nashorn-commonjs-modules)
 
-# CommonJS Modules Support for Nashorn
+# CommonJS Modules Support for Nashorn for java 15 and newer 
 
 This library adds support for CommonJS modules (aka `require`) inside a Nashorn script engine. It is based on the specification for [NodeJS modules](https://nodejs.org/api/modules.html) and it supports loading modules from the `node_modules` folder just as Node does. Of course, it doesn't provide an implementation for Node's APIs, so any module that depends on those won't work.
 
@@ -18,7 +18,15 @@ Add this dependency to your `pom.xml` to reference the library:
 <dependency>
   <groupId>com.coveo</groupId>
   <artifactId>nashorn-commonjs-modules</artifactId>
-  <version>1.0.9</version>
+  <version>1.0.11</version>
+</dependency>
+```
+Add Nashorh because from java 15 is not more included by jdk
+```xml
+<dependency>
+    <groupId>org.openjdk.nashorn</groupId>
+    <artifactId>nashorn-core</artifactId>
+    <version>15.4</version>
 </dependency>
 ```
 

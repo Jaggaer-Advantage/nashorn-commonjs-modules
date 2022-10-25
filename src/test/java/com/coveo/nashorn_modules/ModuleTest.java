@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -15,9 +15,9 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.script.SimpleBindings;
 
-import jdk.nashorn.api.scripting.NashornException;
-import jdk.nashorn.api.scripting.NashornScriptEngine;
-import jdk.nashorn.api.scripting.ScriptObjectMirror;
+import org.openjdk.nashorn.api.scripting.NashornException;
+import org.openjdk.nashorn.api.scripting.NashornScriptEngine;
+import org.openjdk.nashorn.api.scripting.ScriptObjectMirror;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -54,10 +54,10 @@ public class ModuleTest {
     when(sub1.getFolder("node_modules")).thenReturn(sub1nm);
     when(sub1.getFile("sub1file1.js")).thenReturn("exports.sub1file1 = 'sub1file1';");
     when(sub1nm.getPath()).thenReturn("/sub1/node_modules/");
-    when(sub1nm.getParent()).thenReturn(sub1);
+    //when(sub1nm.getParent()).thenReturn(sub1);
     when(sub1nm.getFile("sub1nmfile1.js")).thenReturn("exports.sub1nmfile1 = 'sub1nmfile1';");
     when(sub1sub1.getPath()).thenReturn("/sub1/sub1/");
-    when(sub1sub1.getParent()).thenReturn(sub1);
+    //when(sub1sub1.getParent()).thenReturn(sub1);
     when(sub1sub1.getFile("sub1sub1file1.js"))
         .thenReturn("exports.sub1sub1file1 = 'sub1sub1file1';");
 
@@ -303,11 +303,11 @@ public class ModuleTest {
     Bindings main = (Bindings) engine.eval("require.main");
 
     assertEquals(exports, module.get("exports"));
-    assertEquals(new ArrayList(), module.get("children"));
+    assertEquals(new ArrayList<>(), module.get("children"));
     assertEquals("<main>", module.get("filename"));
     assertEquals("<main>", module.get("id"));
     assertEquals(true, module.get("loaded"));
-    assertEquals(null, module.get("parent"));
+    assertNull(module.get("parent"));
     assertNotNull(exports);
     assertEquals(module, main);
   }
@@ -324,7 +324,7 @@ public class ModuleTest {
     Bindings main = (Bindings) engine.eval("require('./file1')._main");
 
     assertEquals(exports, module.get("exports"));
-    assertEquals(new ArrayList(), module.get("children"));
+    assertEquals(new ArrayList<>(), module.get("children"));
     assertEquals("/file1.js", module.get("filename"));
     assertEquals("/file1.js", module.get("id"));
     assertEquals(true, module.get("loaded"));
@@ -348,7 +348,7 @@ public class ModuleTest {
     Bindings main = (Bindings) engine.eval("require('./sub1/sub1file1')._main");
 
     assertEquals(exports, module.get("exports"));
-    assertEquals(new ArrayList(), module.get("children"));
+    assertEquals(new ArrayList<>(), module.get("children"));
     assertEquals("/sub1/sub1file1.js", module.get("filename"));
     assertEquals("/sub1/sub1file1.js", module.get("id"));
     assertEquals(true, module.get("loaded"));
@@ -372,7 +372,7 @@ public class ModuleTest {
     Bindings main = (Bindings) engine.eval("require('./sub1/sub1/sub1sub1file1')._main");
 
     assertEquals(exports, module.get("exports"));
-    assertEquals(new ArrayList(), module.get("children"));
+    assertEquals(new ArrayList<>(), module.get("children"));
     assertEquals("/sub1/sub1/sub1sub1file1.js", module.get("filename"));
     assertEquals("/sub1/sub1/sub1sub1file1.js", module.get("id"));
     assertEquals(true, module.get("loaded"));
@@ -391,12 +391,12 @@ public class ModuleTest {
     Bindings module = (Bindings) engine.eval("require('./file1')._module");
     Bindings subModule = (Bindings) engine.eval("require('./file1').sub._module");
 
-    assertEquals(null, top.get("parent"));
+    assertNull(top.get("parent"));
     assertEquals(top, module.get("parent"));
     assertEquals(module, subModule.get("parent"));
     assertEquals(module, ((ArrayList) top.get("children")).get(0));
     assertEquals(subModule, ((ArrayList) module.get("children")).get(0));
-    assertEquals(new ArrayList(), subModule.get("children"));
+    assertEquals(new ArrayList<>(), subModule.get("children"));
   }
 
   @Test
