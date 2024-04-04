@@ -21,7 +21,7 @@ public class FilesystemFolderTest {
   private File subsubfile = new File(subfile, "subsubdir");
 
   private String rootPath =
-          file.getAbsolutePath().substring(0, file.getAbsolutePath().indexOf(File.separator));
+      file.getAbsolutePath().substring(0, file.getAbsolutePath().indexOf(File.separator));
 
   @Test
   public void rootFolderHasTheExpectedProperties() {
@@ -65,7 +65,7 @@ public class FilesystemFolderTest {
   @Test
   public void filesystemFolderWorksWhenUsedForReal() throws Throwable {
     NashornScriptEngine engine =
-            (NashornScriptEngine) new ScriptEngineManager().getEngineByName("nashorn");
+        (NashornScriptEngine) new ScriptEngineManager().getEngineByName("nashorn");
     Require.enable(engine, root);
     assertEquals("spam", engine.eval("require('./foo').bar.spam.spam"));
   }

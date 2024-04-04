@@ -28,19 +28,20 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git@github.com:coveo/nashorn-commonjs-modules.git</connection>
-    <developerConnection>scm:git:git@github.com:coveo/nashorn-commonjs-modules.git</developerConnection>
-    <url>http://github.com/coveo/nashorn-commonjs-modules</url>
+    <connection>
+      scm:git:https://github.com/Jaggaer-Advantage/nashorn-commonjs-modules.git
+    </connection>
+    <developerConnection>
+      scm:git:https://github.com/Jaggaer-Advantage/nashorn-commonjs-modules.git
+    </developerConnection>
+    <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>
-    <snapshotRepository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    </snapshotRepository>
     <repository>
-      <id>ossrh</id>
-      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      <id>central</id>
+      <name>esop-releases</name>
+      <url>https://svn.bravosolution.com/artifactory/simple/libs-release-local</url>
     </repository>
   </distributionManagement>
 
